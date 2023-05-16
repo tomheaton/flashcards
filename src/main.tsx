@@ -7,6 +7,8 @@ import Error from "./pages/error";
 import Home from "./pages/home";
 import Questions from "./pages/questions";
 import Test from "./pages/test";
+import { FlashcardType } from "./types";
+import { readData } from "./utils/file";
 
 const router = createBrowserRouter([
   {
@@ -23,11 +25,19 @@ const router = createBrowserRouter([
     path: "/questions",
     element: <Questions />,
     errorElement: <Error />,
+    loader: async () => {
+      const data = await readData();
+      return (data ? JSON.parse(data) : []) as FlashcardType[];
+    },
   },
   {
     path: "/test",
     element: <Test />,
     errorElement: <Error />,
+    loader: async () => {
+      const data = await readData();
+      return (data ? JSON.parse(data) : []) as FlashcardType[];
+    },
   },
 ]);
 

@@ -19,7 +19,7 @@ export default function Create() {
   };
 
   return (
-    <div className="mt-20 flex h-screen w-full flex-col items-center">
+    <div className="mt-20 flex w-full flex-col items-center">
       <h1 className="text-4xl font-extrabold tracking-tighter">create</h1>
       <div className="space-x-4">
         <Link to={`/`}>
@@ -38,7 +38,7 @@ export default function Create() {
           Question
         </label>
         <input
-          className="rounded-md border-2 border-gray-300 px-4 py-2"
+          className="rounded-md border-2 border-gray-300 bg-black px-4 py-2 text-white"
           type="text"
           placeholder="What is TypeScript?"
           required
@@ -49,7 +49,7 @@ export default function Create() {
           Answer
         </label>
         <textarea
-          className="rounded-md border-2 border-gray-300 px-4 py-2"
+          className="rounded-md border-2 border-gray-300 bg-black px-4 py-2 text-white"
           placeholder="The best language!"
           required
           value={data.answer}
