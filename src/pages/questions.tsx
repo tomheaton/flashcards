@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useActionData, useLoaderData } from "react-router-dom";
 import Flashcard from "../components/flashcard";
 import { FlashcardType } from "../types";
 
@@ -21,8 +21,8 @@ export default function Questions() {
       </div>
       <br />
       <div className="flex flex-col space-y-2">
-        {data.map((flashcard) => (
-          <Flashcard key={flashcard.question} data={flashcard} />
+        {data.map((flashcard, index) => (
+          <Flashcard key={flashcard.question} initialData={flashcard} index={index} />
         ))}
         {data.length === 0 && <p className="text-sm">No flashcards found</p>}
       </div>

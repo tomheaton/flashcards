@@ -33,7 +33,7 @@ export default function Test() {
 
   return (
     <div className="mt-20 flex w-full flex-col items-center">
-      <h1 className="text-4xl font-extrabold tracking-tighter">test</h1>
+      <h1 className="text-4xl font-extrabold tracking-tighter">Test</h1>
       <div className="space-x-4">
         <Link to={`/create`}>
           <button>Create</button>

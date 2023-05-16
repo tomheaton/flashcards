@@ -58,6 +58,35 @@ export const saveFlashcard = async (flashcard: FlashcardType) => {
   }
 };
 
+// TODO: better error handling
+export const updateFlashcard = async (flashcard: FlashcardType, index: number) => {
+  try {
+    let flashcards: FlashcardType[] = [];
+
+    const data = await readData();
+
+    if (data) {
+      const parsedData = JSON.parse(data) as FlashcardType[];
+      flashcards = parsedData;
+    }
+
+    // flashcards.push(flashcard);
+    flashcards[index] = flashcard;
+
+    await writeFile(
+      {
+        contents: JSON.stringify(flashcards, null, 2),
+        path: `data.json`,
+      },
+      {
+        dir: BaseDirectory.Desktop,
+      },
+    );
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 export const readData = async () => {
   try {
     const data = await readTextFile("data.json", {

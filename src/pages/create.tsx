@@ -20,7 +20,7 @@ export default function Create() {
 
   return (
     <div className="mt-20 flex w-full flex-col items-center">
-      <h1 className="text-4xl font-extrabold tracking-tighter">create</h1>
+      <h1 className="text-4xl font-extrabold tracking-tighter">Create</h1>
       <div className="space-x-4">
         <Link to={`/`}>
           <button>Home</button>

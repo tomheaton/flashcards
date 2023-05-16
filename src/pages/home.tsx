@@ -29,7 +29,7 @@ export default function Home() {
 
   return (
     <div className="mt-20 flex w-full flex-col items-center">
-      <h1 className="text-4xl font-extrabold tracking-tighter">flashcards</h1>
+      <h1 className="text-4xl font-extrabold tracking-tighter">Flashcards</h1>
       <div className="space-x-4">
         <Link to={`/create`}>
           <button>Create</button>
