@@ -8,7 +8,25 @@ export default function Test() {
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
   const [counter, setCounter] = useState<number>(0);
 
-  // move to buttons
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        setCounter((p) => (p > 0 ? p - 1 : data.length - 1));
+      } else if (e.key === "ArrowRight") {
+        setCounter((p) => (p < data.length - 1 ? p + 1 : 0));
+      } else if (e.key === " ") {
+        setShowAnswer((p) => !p);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
+
+  // move to button click logic
   useEffect(() => {
     setShowAnswer(false);
   }, [counter]);
