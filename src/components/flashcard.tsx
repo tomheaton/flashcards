@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { useRevalidator } from "react-router-dom";
 import type { FlashcardType } from "../types";
-import { updateFlashcard } from "../utils/file";
+import { deleteFlashcard, updateFlashcard } from "../utils/file";
 
 export default function Flashcard({
   initialData,
@@ -19,6 +19,12 @@ export default function Flashcard({
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await updateFlashcard(data, index);
+    setIsEditing(false);
+    revalidator.revalidate();
+  };
+
+  const handleDelete = async () => {
+    await deleteFlashcard(index);
     setIsEditing(false);
     revalidator.revalidate();
   };
@@ -54,6 +60,9 @@ export default function Flashcard({
           />
           <button type="submit">Save</button>
         </form>
+        <button onClick={handleDelete} className="text-red-500">
+          Delete
+        </button>
       </div>
     );
   }

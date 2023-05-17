@@ -30,6 +30,18 @@ export const createDataFile = async () => {
   }
 };
 
+export const readData = async () => {
+  try {
+    const data = await readTextFile("data.json", {
+      dir: BaseDirectory.Desktop,
+    });
+
+    return data;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 // TODO: better error handling
 export const saveFlashcard = async (flashcard: FlashcardType) => {
   try {
@@ -86,15 +98,30 @@ export const updateFlashcard = async (flashcard: FlashcardType, index: number) =
     console.error(e);
   }
 };
-
-export const readData = async () => {
+// TODO: better error handling
+export const deleteFlashcard = async (index: number) => {
   try {
-    const data = await readTextFile("data.json", {
-      dir: BaseDirectory.Desktop,
-    });
+    let flashcards: FlashcardType[] = [];
 
-    return data;
+    const data = await readData();
+
+    if (data) {
+      const parsedData = JSON.parse(data) as FlashcardType[];
+      flashcards = parsedData;
+    }
+
+    flashcards.splice(index, 1);
+
+    await writeFile(
+      {
+        contents: JSON.stringify(flashcards, null, 2),
+        path: `data.json`,
+      },
+      {
+        dir: BaseDirectory.Desktop,
+      },
+    );
   } catch (e) {
     console.error(e);
   }
-};
+}
