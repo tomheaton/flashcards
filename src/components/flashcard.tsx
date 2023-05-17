@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { useRevalidator } from "react-router-dom";
 import type { FlashcardType } from "../types";
 import { updateFlashcard } from "../utils/file";
 
@@ -10,6 +11,8 @@ export default function Flashcard({
   // TODO: use ID instead of index, need to add ID to data type
   index: number;
 }) {
+  let revalidator = useRevalidator();
+
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [data, setData] = useState<FlashcardType>(initialData);
 
@@ -17,16 +20,19 @@ export default function Flashcard({
     e.preventDefault();
     await updateFlashcard(data, index);
     setIsEditing(false);
+    revalidator.revalidate();
   };
 
   if (isEditing) {
     return (
       <div className="flex w-[400px] flex-col space-y-2 rounded-lg border-2 border-gray-500 p-2">
-        <form onSubmit={handleSubmit} className="flex flex-col space-y-2">
+        <form className="flex flex-col space-y-2" onSubmit={handleSubmit}>
           <label htmlFor="question" className="text-sm">
             Question
           </label>
           <input
+            id="question"
+            name="question"
             className="rounded-md border-2 border-gray-300 bg-black px-4 py-2 text-white"
             type="text"
             placeholder={initialData.question}
@@ -38,6 +44,8 @@ export default function Flashcard({
             Answer
           </label>
           <textarea
+            id="answer"
+            name="answer"
             className="rounded-md border-2 border-gray-300 bg-black px-4 py-2 text-white"
             placeholder={initialData.answer}
             required
