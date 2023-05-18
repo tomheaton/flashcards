@@ -1,6 +1,6 @@
 import { message } from "@tauri-apps/api/dialog";
 import { useState, type FormEvent } from "react";
-import { Link } from "react-router-dom";
+import Nav from "../components/nav";
 import type { FlashcardType } from "../types";
 import { saveFlashcard } from "../utils/file";
 
@@ -21,17 +21,7 @@ export default function Create() {
   return (
     <div className="mt-20 flex w-full flex-col items-center">
       <h1 className="text-4xl font-extrabold tracking-tighter">Create</h1>
-      <div className="space-x-4">
-        <Link to={`/`}>
-          <button>Home</button>
-        </Link>
-        <Link to={`/questions`}>
-          <button>Questions</button>
-        </Link>
-        <Link to={`/test`}>
-          <button>Test</button>
-        </Link>
-      </div>
+      <Nav />
       <br />
       <form onSubmit={handleSubmit} className="flex flex-col space-y-2">
         <label htmlFor="question" className="text-sm">

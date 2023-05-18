@@ -124,4 +124,4 @@ export const deleteFlashcard = async (index: number) => {
   } catch (e) {
     console.error(e);
   }
-}
+};

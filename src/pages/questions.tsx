@@ -1,6 +1,7 @@
 import { Link, useActionData, useLoaderData } from "react-router-dom";
 import Flashcard from "../components/flashcard";
 import { FlashcardType } from "../types";
+import Nav from "../components/nav";
 
 export default function Questions() {
   const data = useLoaderData() as FlashcardType[];
@@ -8,17 +9,7 @@ export default function Questions() {
   return (
     <div className="mt-20 flex w-full flex-col items-center">
       <h1 className="text-4xl font-extrabold tracking-tighter">Questions</h1>
-      <div className="space-x-4">
-        <Link to={`/create`}>
-          <button>Create</button>
-        </Link>
-        <Link to={`/`}>
-          <button>Home</button>
-        </Link>
-        <Link to={`/test`}>
-          <button>Test</button>
-        </Link>
-      </div>
+      <Nav />
       <br />
       <div className="flex flex-col space-y-2">
         {data.map((flashcard, index) => (

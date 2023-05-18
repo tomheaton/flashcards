@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
+import Nav from "../components/nav";
 import { FlashcardType } from "../types";
 
 export default function Test() {
@@ -34,17 +35,7 @@ export default function Test() {
   return (
     <div className="mt-20 flex w-full flex-col items-center">
       <h1 className="text-4xl font-extrabold tracking-tighter">Test</h1>
-      <div className="space-x-4">
-        <Link to={`/create`}>
-          <button>Create</button>
-        </Link>
-        <Link to={`/questions`}>
-          <button>Questions</button>
-        </Link>
-        <Link to={`/`}>
-          <button>Home</button>
-        </Link>
-      </div>
+      <Nav />
       <br />
       <div className="text-sm font-bold">{data[counter]?.question}</div>
       {showAnswer && <div className="text-sm">{data[counter]?.answer}</div>}
