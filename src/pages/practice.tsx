@@ -3,7 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import Nav from "../components/nav";
 import { FlashcardType } from "../types";
 
-export default function Test() {
+export default function Practice() {
   const data = useLoaderData() as FlashcardType[];
 
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
@@ -34,22 +34,31 @@ export default function Test() {
 
   return (
     <div className="mt-20 flex w-full flex-col items-center">
-      <h1 className="text-4xl font-extrabold tracking-tighter">Test</h1>
+      <h1 className="text-4xl font-extrabold tracking-tighter">Practice</h1>
       <Nav />
+      <p className="text-xl font-semibold">{data[counter]?.question}</p>
+      {showAnswer && <p>{data[counter]?.answer}</p>}
       <br />
-      <div className="text-sm font-bold">{data[counter]?.question}</div>
-      {showAnswer && <div className="text-sm">{data[counter]?.answer}</div>}
-      <br />
-      <button onClick={() => setShowAnswer((p) => !p)}>toggle answer</button>
+      <button onClick={() => setShowAnswer((p) => !p)} className="btn">
+        Toggle Answer
+      </button>
       <br />
       <div className="flex space-x-4">
-        <button onClick={() => setCounter((p) => (p > 0 ? p - 1 : data.length - 1))}>
-          previous
+        <button
+          onClick={() => setCounter((p) => (p > 0 ? p - 1 : data.length - 1))}
+          className="btn"
+        >
+          Previous
         </button>
         <p>
           {counter + 1} / {data.length}
         </p>
-        <button onClick={() => setCounter((p) => (p < data.length - 1 ? p + 1 : 0))}>next</button>
+        <button
+          onClick={() => setCounter((p) => (p < data.length - 1 ? p + 1 : 0))}
+          className="btn"
+        >
+          Next
+        </button>
       </div>
     </div>
   );

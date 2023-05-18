@@ -6,7 +6,7 @@ import Create from "./pages/create";
 import Error from "./pages/error";
 import Home from "./pages/home";
 import Questions from "./pages/questions";
-import Test from "./pages/test";
+import Practice from "./pages/practice";
 import { FlashcardType } from "./types";
 import { readData } from "./utils/file";
 
@@ -31,8 +31,8 @@ const router = createBrowserRouter([
     },
   },
   {
-    path: "/test",
-    element: <Test />,
+    path: "/practice",
+    element: <Practice />,
     errorElement: <Error />,
     loader: async () => {
       const data = await readData();
