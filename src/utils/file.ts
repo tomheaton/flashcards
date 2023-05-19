@@ -1,5 +1,6 @@
 import { BaseDirectory, createDir, readTextFile, writeFile } from "@tauri-apps/api/fs";
 import type { FlashcardType } from "../types";
+import { FlashcardSchema } from "./types";
 
 // TODO: Create a data folder on first run
 export const createDataFolder = async () => {
@@ -48,11 +49,12 @@ export const saveFlashcard = async (flashcard: FlashcardType) => {
     let flashcards: FlashcardType[] = [];
 
     const data = await readData();
+    const jsonData = data ? JSON.parse(data) : [];
 
-    if (data) {
-      const parsedData = JSON.parse(data) as FlashcardType[];
-      flashcards = parsedData;
-    }
+    flashcards = jsonData.flatMap((f: any) => {
+      const result = FlashcardSchema.safeParse(f);
+      return result.success ? result.data : [];
+    });
 
     flashcards.push(flashcard);
 
@@ -76,13 +78,13 @@ export const updateFlashcard = async (flashcard: FlashcardType, index: number) =
     let flashcards: FlashcardType[] = [];
 
     const data = await readData();
+    const jsonData = data ? JSON.parse(data) : [];
 
-    if (data) {
-      const parsedData = JSON.parse(data) as FlashcardType[];
-      flashcards = parsedData;
-    }
+    flashcards = jsonData.flatMap((f: any) => {
+      const result = FlashcardSchema.safeParse(f);
+      return result.success ? result.data : [];
+    });
 
-    // flashcards.push(flashcard);
     flashcards[index] = flashcard;
 
     await writeFile(
@@ -104,11 +106,12 @@ export const deleteFlashcard = async (index: number) => {
     let flashcards: FlashcardType[] = [];
 
     const data = await readData();
+    const jsonData = data ? JSON.parse(data) : [];
 
-    if (data) {
-      const parsedData = JSON.parse(data) as FlashcardType[];
-      flashcards = parsedData;
-    }
+    flashcards = jsonData.flatMap((f: any) => {
+      const result = FlashcardSchema.safeParse(f);
+      return result.success ? result.data : [];
+    });
 
     flashcards.splice(index, 1);
 

@@ -5,10 +5,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Create from "./pages/create";
 import Error from "./pages/error";
 import Home from "./pages/home";
-import Questions from "./pages/questions";
 import Practice from "./pages/practice";
-import { FlashcardType } from "./types";
+import Questions from "./pages/questions";
 import { readData } from "./utils/file";
+import { FlashcardSchema } from "./utils/types";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +27,12 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     loader: async () => {
       const data = await readData();
-      return (data ? JSON.parse(data) : []) as FlashcardType[];
+      const jsonData = data ? JSON.parse(data) : [];
+
+      return jsonData.flatMap((f: any) => {
+        const result = FlashcardSchema.safeParse(f);
+        return result.success ? result.data : [];
+      });
     },
   },
   {
@@ -36,7 +41,12 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     loader: async () => {
       const data = await readData();
-      return (data ? JSON.parse(data) : []) as FlashcardType[];
+      const jsonData = data ? JSON.parse(data) : [];
+
+      return jsonData.flatMap((f: any) => {
+        const result = FlashcardSchema.safeParse(f);
+        return result.success ? result.data : [];
+      });
     },
   },
 ]);
