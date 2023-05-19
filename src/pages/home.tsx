@@ -1,8 +1,7 @@
 import { BaseDirectory, exists } from "@tauri-apps/api/fs";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import Header from "../components/header";
 import { createDataFile } from "../utils/file";
-import Nav from "../components/nav";
 
 export default function Home() {
   useEffect(() => {
@@ -29,9 +28,12 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="mt-20 flex w-full flex-col items-center">
-      <h1 className="text-4xl font-extrabold tracking-tighter">Flashcards</h1>
-      <Nav />
+    <div className="flex h-screen w-full flex-col py-20">
+      <Header />
+
+      <main className="flex flex-1 flex-col items-center">
+        <p className="text-sm font-semibold">Welcome to Flashcards!</p>
+      </main>
     </div>
   );
 }

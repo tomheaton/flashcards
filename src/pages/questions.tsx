@@ -1,21 +1,21 @@
 import { useLoaderData } from "react-router-dom";
 import Flashcard from "../components/flashcard";
-import Nav from "../components/nav";
-import { FlashcardType } from "../types";
+import Header from "../components/header";
+import type { FlashcardType } from "../utils/types";
 
 export default function Questions() {
   const data = useLoaderData() as FlashcardType[];
 
   return (
-    <div className="mt-20 flex w-full flex-col items-center">
-      <h1 className="text-4xl font-extrabold tracking-tighter">Questions</h1>
-      <Nav />
-      <div className="flex flex-col space-y-2">
+    <div className="flex h-screen w-full flex-col py-20">
+      <Header />
+
+      <main className="flex flex-1 flex-col items-center space-y-2">
+        {data.length === 0 && <p className="text-sm font-semibold">No flashcards found!</p>}
         {data.map((flashcard, index) => (
           <Flashcard key={flashcard.question} initialData={flashcard} index={index} />
         ))}
-        {data.length === 0 && <p className="text-sm">No flashcards found</p>}
-      </div>
+      </main>
     </div>
   );
 }

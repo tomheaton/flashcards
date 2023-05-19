@@ -1,6 +1,5 @@
 import { BaseDirectory, createDir, readTextFile, writeFile } from "@tauri-apps/api/fs";
-import type { FlashcardType } from "../types";
-import { FlashcardSchema } from "./types";
+import { FlashcardSchema, type FlashcardType } from "./types";
 
 // TODO: Create a data folder on first run
 export const createDataFolder = async () => {

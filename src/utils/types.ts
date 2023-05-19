@@ -5,4 +5,4 @@ export const FlashcardSchema = z.object({
   answer: z.string(),
 });
 
-export type Flashcard = z.infer<typeof FlashcardSchema>;
+export type FlashcardType = z.infer<typeof FlashcardSchema>;

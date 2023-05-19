@@ -1,11 +1,13 @@
-import { Link } from "react-router-dom";
-import Nav from "../components/nav";
+import Header from "../components/header";
 
 export default function Error() {
   return (
-    <div className="flex h-screen w-full flex-col items-center justify-center">
-      <h1 className="text-4xl font-extrabold tracking-tighter">Error!</h1>
-      <Nav />
+    <div className="flex h-screen w-full flex-col py-20">
+      <Header />
+
+      <main className="flex flex-1 flex-col items-center">
+        <p className="text-sm font-semibold">Oops!</p>
+      </main>
     </div>
   );
 }

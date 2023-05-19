@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useRevalidator } from "react-router-dom";
-import type { FlashcardType } from "../types";
 import { deleteFlashcard, updateFlashcard } from "../utils/file";
+import type { FlashcardType } from "../utils/types";
 
 export default function Flashcard({
   initialData,
