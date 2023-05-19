@@ -43,7 +43,7 @@ export const readData = async () => {
 };
 
 // TODO: better error handling
-export const saveFlashcard = async (flashcard: FlashcardType) => {
+export const saveFlashcard = async (flashcard: Omit<FlashcardType, "id">) => {
   try {
     let flashcards: FlashcardType[] = [];
 
@@ -55,7 +55,11 @@ export const saveFlashcard = async (flashcard: FlashcardType) => {
       return result.success ? result.data : [];
     });
 
-    flashcards.push(flashcard);
+    flashcards.push({
+      ...flashcard,
+      // TODO: better id system
+      id: Math.random().toString(36).substring(7),
+    });
 
     await writeFile(
       {
@@ -71,8 +75,9 @@ export const saveFlashcard = async (flashcard: FlashcardType) => {
   }
 };
 
+// TODO: only pass question/answer to this?
 // TODO: better error handling
-export const updateFlashcard = async (flashcard: FlashcardType, index: number) => {
+export const updateFlashcard = async (flashcard: FlashcardType) => {
   try {
     let flashcards: FlashcardType[] = [];
 
@@ -84,6 +89,7 @@ export const updateFlashcard = async (flashcard: FlashcardType, index: number) =
       return result.success ? result.data : [];
     });
 
+    const index = flashcards.findIndex((f) => f.id === flashcard.id);
     flashcards[index] = flashcard;
 
     await writeFile(
@@ -100,7 +106,7 @@ export const updateFlashcard = async (flashcard: FlashcardType, index: number) =
   }
 };
 // TODO: better error handling
-export const deleteFlashcard = async (index: number) => {
+export const deleteFlashcard = async (id: string) => {
   try {
     let flashcards: FlashcardType[] = [];
 
@@ -112,6 +118,7 @@ export const deleteFlashcard = async (index: number) => {
       return result.success ? result.data : [];
     });
 
+    const index = flashcards.findIndex((f) => f.id === id);
     flashcards.splice(index, 1);
 
     await writeFile(

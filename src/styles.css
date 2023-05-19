@@ -9,7 +9,7 @@ body {
 @layer components {
   .btn {
     @apply rounded-full bg-white/10 px-2 py-1 text-sm font-semibold text-white/50 transition-all
-    hover:cursor-pointer hover:text-white active:scale-95;
+    hover:cursor-pointer hover:bg-white/20 hover:text-white active:scale-95;
   }
   .btn-red {
     @apply btn bg-red-500/50 hover:bg-red-500;

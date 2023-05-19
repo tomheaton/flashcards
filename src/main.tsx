@@ -6,7 +6,7 @@ import Create from "./pages/create";
 import Error from "./pages/error";
 import Home from "./pages/home";
 import Practice from "./pages/practice";
-import Questions from "./pages/questions";
+import Cards from "./pages/cards";
 import Stats from "./pages/stats";
 import { readData } from "./utils/file";
 import { FlashcardSchema } from "./utils/types";
@@ -23,8 +23,8 @@ const router = createBrowserRouter([
     errorElement: <Error />,
   },
   {
-    path: "/questions",
-    element: <Questions />,
+    path: "/cards",
+    element: <Cards />,
     errorElement: <Error />,
     loader: async () => {
       const data = await readData();

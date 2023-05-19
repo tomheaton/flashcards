@@ -1,7 +1,9 @@
 {
   "name": "flashcards",
-  "private": true,
   "version": "0.0.0",
+  "description": "flashcards",
+  "author": "tomheaton",
+  "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",

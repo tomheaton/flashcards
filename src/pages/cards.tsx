@@ -3,7 +3,7 @@ import Flashcard from "../components/flashcard";
 import Header from "../components/header";
 import type { FlashcardType } from "../utils/types";
 
-export default function Questions() {
+export default function Cards() {
   // TODO: move function to this file and get type from return type
   const data = useLoaderData() as FlashcardType[];
 
@@ -13,8 +13,8 @@ export default function Questions() {
 
       <main className="flex flex-1 flex-col items-center space-y-2">
         {data.length === 0 && <p className="text-sm font-semibold">No flashcards found!</p>}
-        {data.map((flashcard, index) => (
-          <Flashcard key={flashcard.question} initialData={flashcard} index={index} />
+        {data.map((flashcard) => (
+          <Flashcard key={flashcard.id} flashcard={flashcard} />
         ))}
       </main>
     </div>

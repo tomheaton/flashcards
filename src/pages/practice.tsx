@@ -11,11 +11,16 @@ export default function Practice() {
   const [counter, setCounter] = useState<number>(0);
 
   useEffect(() => {
-    // TODO: handle if show button is already selected active
     const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.target !== document.body) {
+        return;
+      }
+
       if (e.key === "ArrowLeft") {
+        setShowAnswer(false);
         setCounter((p) => (p > 0 ? p - 1 : data.length - 1));
       } else if (e.key === "ArrowRight") {
+        setShowAnswer(false);
         setCounter((p) => (p < data.length - 1 ? p + 1 : 0));
       } else if (e.key === " ") {
         setShowAnswer((p) => !p);
@@ -28,11 +33,6 @@ export default function Practice() {
       window.removeEventListener("keydown", handleKeyPress);
     };
   }, []);
-
-  // move to button click logic
-  useEffect(() => {
-    setShowAnswer(false);
-  }, [counter]);
 
   if (!data.length) {
     return (
@@ -54,10 +54,6 @@ export default function Practice() {
         <div className="flex flex-col items-center">
           <p className="text-xl font-semibold">{data[counter]?.question}</p>
           {showAnswer && <p>{data[counter]?.answer}</p>}
-          <br />
-          {/* <button onClick={() => setShowAnswer((p) => !p)} className="btn">
-            {showAnswer ? "Hide Answer" : "Show Answer"}
-          </button> */}
         </div>
 
         <div className="flex flex-col space-y-4">

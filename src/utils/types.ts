@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const FlashcardSchema = z.object({
+  id: z.string(),
   question: z.string(),
   answer: z.string(),
 });
