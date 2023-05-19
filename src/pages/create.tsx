@@ -3,6 +3,7 @@ import Header from "../components/header";
 import { saveFlashcard } from "../utils/file";
 import type { FlashcardType } from "../utils/types";
 
+// TODO: refactor to /questions/create
 export default function Create() {
   const [showSuccess, setShowSuccess] = useState<boolean>(false);
   const [data, setData] = useState<FlashcardType>({

@@ -6,3 +6,11 @@ export const FlashcardSchema = z.object({
 });
 
 export type FlashcardType = z.infer<typeof FlashcardSchema>;
+
+export const StatsSchema = z.object({
+  total: z.number(),
+  correct: z.number(),
+  incorrect: z.number(),
+});
+
+export type StatsType = z.infer<typeof StatsSchema>;

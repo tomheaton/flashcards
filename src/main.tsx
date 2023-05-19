@@ -7,6 +7,7 @@ import Error from "./pages/error";
 import Home from "./pages/home";
 import Practice from "./pages/practice";
 import Questions from "./pages/questions";
+import Stats from "./pages/stats";
 import { readData } from "./utils/file";
 import { FlashcardSchema } from "./utils/types";
 
@@ -47,6 +48,18 @@ const router = createBrowserRouter([
         const result = FlashcardSchema.safeParse(f);
         return result.success ? result.data : [];
       });
+    },
+  },
+  {
+    path: "/stats",
+    element: <Stats />,
+    errorElement: <Error />,
+    loader: async () => {
+      return {
+        total: 420,
+        correct: 13,
+        incorrect: 69,
+      };
     },
   },
 ]);

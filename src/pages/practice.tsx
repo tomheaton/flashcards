@@ -4,6 +4,7 @@ import Header from "../components/header";
 import type { FlashcardType } from "../utils/types";
 
 export default function Practice() {
+  // TODO: move function to this file and get type from return type
   const data = useLoaderData() as FlashcardType[];
 
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
@@ -32,6 +33,18 @@ export default function Practice() {
   useEffect(() => {
     setShowAnswer(false);
   }, [counter]);
+
+  if (!data.length) {
+    return (
+      <div className="flex h-screen w-full flex-col py-20">
+        <Header />
+
+        <main className="flex flex-1 flex-col items-center space-y-2">
+          <p className="text-sm font-semibold">No flashcards found!</p>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen w-full flex-col py-20">

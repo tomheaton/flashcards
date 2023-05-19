@@ -2,9 +2,10 @@ import { Link, useLocation } from "react-router-dom";
 
 const routes: { path: string; name: string }[] = [
   { path: "/", name: "Home" },
-  { path: "/questions", name: "Questions" },
   { path: "/create", name: "Create" },
+  { path: "/questions", name: "Questions" },
   { path: "/practice", name: "Practice" },
+  { path: "/stats", name: "Stats" },
 ];
 
 export default function Header() {
