@@ -11,13 +11,13 @@ export default function Stats() {
 
       <main className="flex flex-1 flex-col items-center">
         <p className="text-sm font-semibold">
-          Total: <span className="text-emerald-500">{data.total}</span>
+          Total: <span className="text-emerald-500">{data.total.toLocaleString()}</span>
         </p>
         <p className="text-sm font-semibold">
-          Correct: <span className="text-emerald-500">{data.correct}</span>
+          Correct: <span className="text-emerald-500">{data.correct.toLocaleString()}</span>
         </p>
         <p className="text-sm font-semibold">
-          Incorrect: <span className="text-red-500">{data.incorrect}</span>
+          Incorrect: <span className="text-red-500">{data.incorrect.toLocaleString()}</span>
         </p>
       </main>
     </div>

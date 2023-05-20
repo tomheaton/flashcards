@@ -11,7 +11,11 @@ export default function Cards() {
       <Header />
 
       <main className="flex flex-1 flex-col items-center space-y-2">
-        {data.length === 0 && <p className="text-sm font-semibold">No flashcards found!</p>}
+        {data.length === 0 ? (
+          <p className="text-sm font-semibold">No flashcards found!</p>
+        ) : (
+          <p className="w-[300px] text-sm font-semibold">Total: {data.length.toLocaleString()}</p>
+        )}
         {data.map((flashcard) => (
           <Flashcard key={flashcard.id} flashcard={flashcard} />
         ))}

@@ -9,7 +9,6 @@ export default function Flashcard({ flashcard }: { flashcard: FlashcardType }) {
   const flashcardRef = useRef<HTMLDivElement>(null);
 
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  // TODO: only use question/answer from flashcard here?
   const [data, setData] = useState<FlashcardType>(flashcard);
 
   useEffect(() => {
@@ -41,7 +40,7 @@ export default function Flashcard({ flashcard }: { flashcard: FlashcardType }) {
 
   if (!isEditing) {
     return (
-      <div className="group flex w-[300px] justify-between space-y-2 rounded-lg border-2 border-white/50 p-2">
+      <div className="group flex w-[300px] items-center justify-between space-y-2 rounded-lg border-2 border-white/50 p-2">
         <div>
           <p className="text-sm font-semibold">{flashcard.question}</p>
           <p className="text-sm">{flashcard.answer}</p>
