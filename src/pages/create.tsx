@@ -26,8 +26,8 @@ export default function Create() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await saveFlashcard(data);
-    setData({ question: "", answer: "" });
     setShowSuccess(true);
+    setData({ question: "", answer: "" });
   };
 
   return (

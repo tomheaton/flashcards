@@ -43,7 +43,6 @@ export default function Flashcard({ flashcard }: { flashcard: FlashcardType }) {
     return (
       <div className="group flex w-[300px] justify-between space-y-2 rounded-lg border-2 border-white/50 p-2">
         <div>
-          <p>{flashcard.id}</p>
           <p className="text-sm font-semibold">{flashcard.question}</p>
           <p className="text-sm">{flashcard.answer}</p>
         </div>

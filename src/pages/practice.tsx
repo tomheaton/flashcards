@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Header from "../components/header";
-import type { FlashcardType } from "../utils/types";
+import { type FlashcardType } from "../utils/types";
 
 export default function Practice() {
-  // TODO: move function to this file and get type from return type
   const data = useLoaderData() as FlashcardType[];
 
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
@@ -16,14 +15,17 @@ export default function Practice() {
         return;
       }
 
-      if (e.key === "ArrowLeft") {
-        setShowAnswer(false);
-        setCounter((p) => (p > 0 ? p - 1 : data.length - 1));
-      } else if (e.key === "ArrowRight") {
-        setShowAnswer(false);
-        setCounter((p) => (p < data.length - 1 ? p + 1 : 0));
-      } else if (e.key === " ") {
-        setShowAnswer((p) => !p);
+      switch (e.key) {
+        case "ArrowLeft":
+          setShowAnswer(false);
+          setCounter((p) => (p > 0 ? p - 1 : data.length - 1));
+          break;
+        case "ArrowRight":
+          setShowAnswer(false);
+          setCounter((p) => (p < data.length - 1 ? p + 1 : 0));
+          break;
+        case " ":
+          setShowAnswer((p) => !p);
       }
     };
 

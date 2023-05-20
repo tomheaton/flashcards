@@ -3,7 +3,6 @@ import Header from "../components/header";
 import type { StatsType } from "../utils/types";
 
 export default function Stats() {
-  // TODO: move function to this file and get type from return type
   const data = useLoaderData() as StatsType;
 
   return (

@@ -4,7 +4,6 @@ import Header from "../components/header";
 import type { FlashcardType } from "../utils/types";
 
 export default function Cards() {
-  // TODO: move function to this file and get type from return type
   const data = useLoaderData() as FlashcardType[];
 
   return (
