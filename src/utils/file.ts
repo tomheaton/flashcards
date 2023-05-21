@@ -43,7 +43,7 @@ export const readData = async () => {
 };
 
 // TODO: better error handling
-export const saveFlashcard = async (flashcard: Omit<FlashcardType, "id">) => {
+export const saveFlashcard = async (flashcard: Pick<FlashcardType, "question" | "answer">) => {
   try {
     let flashcards: FlashcardType[] = [];
 
@@ -59,6 +59,7 @@ export const saveFlashcard = async (flashcard: Omit<FlashcardType, "id">) => {
       ...flashcard,
       // TODO: better id system
       id: Math.random().toString(36).substring(7),
+      currentDifficulty: "medium",
     });
 
     await writeFile(
@@ -75,9 +76,11 @@ export const saveFlashcard = async (flashcard: Omit<FlashcardType, "id">) => {
   }
 };
 
-// TODO: only pass question/answer to this?
 // TODO: better error handling
-export const updateFlashcard = async (flashcard: FlashcardType) => {
+export const updateFlashcard = async (
+  id: string,
+  flashcard: Partial<Omit<FlashcardType, "id">>,
+) => {
   try {
     let flashcards: FlashcardType[] = [];
 
@@ -89,8 +92,12 @@ export const updateFlashcard = async (flashcard: FlashcardType) => {
       return result.success ? result.data : [];
     });
 
-    const index = flashcards.findIndex((f) => f.id === flashcard.id);
-    flashcards[index] = flashcard;
+    const index = flashcards.findIndex((f) => f.id === id);
+
+    flashcards[index] = {
+      ...flashcards[index],
+      ...flashcard,
+    };
 
     await writeFile(
       {
@@ -105,6 +112,7 @@ export const updateFlashcard = async (flashcard: FlashcardType) => {
     console.error(e);
   }
 };
+
 // TODO: better error handling
 export const deleteFlashcard = async (id: string) => {
   try {
@@ -119,6 +127,7 @@ export const deleteFlashcard = async (id: string) => {
     });
 
     const index = flashcards.findIndex((f) => f.id === id);
+
     flashcards.splice(index, 1);
 
     await writeFile(

@@ -6,7 +6,7 @@ import type { FlashcardType } from "../utils/types";
 // TODO: refactor to /questions/create
 export default function Create() {
   const [showSuccess, setShowSuccess] = useState<boolean>(false);
-  const [data, setData] = useState<Omit<FlashcardType, "id">>({
+  const [data, setData] = useState<Pick<FlashcardType, "question" | "answer">>({
     question: "",
     answer: "",
   });

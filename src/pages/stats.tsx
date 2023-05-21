@@ -19,6 +19,16 @@ export default function Stats() {
         <p className="text-sm font-semibold">
           Incorrect: <span className="text-red-500">{data.incorrect.toLocaleString()}</span>
         </p>
+        <br />
+        <p className="text-sm font-semibold">
+          Easy: <span className="text-emerald-500">{data.easy.toLocaleString()}</span>
+        </p>
+        <p className="text-sm font-semibold">
+          Medium: <span className="text-yellow-500">{data.medium.toLocaleString()}</span>
+        </p>
+        <p className="text-sm font-semibold">
+          Hard: <span className="text-red-500">{data.hard.toLocaleString()}</span>
+        </p>
       </main>
     </div>
   );

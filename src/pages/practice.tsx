@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Header from "../components/header";
-import { type FlashcardType } from "../utils/types";
+import type { DifficultyType, FlashcardType } from "../utils/types";
 
-const difficultyLevels: { key: string; label: string; textStyle: string }[] = [
-  { key: "hard", label: "Hard", textStyle: "text-red-500" },
-  { key: "medium", label: "Medium", textStyle: "text-yellow-500" },
+const difficultyLevels: { key: DifficultyType; label: string; textStyle: string }[] = [
   { key: "easy", label: "Easy", textStyle: "text-emerald-500" },
+  { key: "medium", label: "Medium", textStyle: "text-yellow-500" },
+  { key: "hard", label: "Hard", textStyle: "text-red-500" },
 ];
 
 export default function Practice() {

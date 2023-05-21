@@ -9,7 +9,7 @@ export default function Flashcard({ flashcard }: { flashcard: FlashcardType }) {
   const flashcardRef = useRef<HTMLDivElement>(null);
 
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [data, setData] = useState<FlashcardType>(flashcard);
+  const [data, setData] = useState<Omit<FlashcardType, "id">>(flashcard);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -27,7 +27,7 @@ export default function Flashcard({ flashcard }: { flashcard: FlashcardType }) {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await updateFlashcard(data);
+    await updateFlashcard(flashcard.id, data);
     setIsEditing(false);
     revalidator.revalidate();
   };
