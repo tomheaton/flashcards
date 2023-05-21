@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Header from "../components/header";
 import { difficultyLevels } from "../utils/constants";
@@ -8,38 +8,70 @@ import type { FlashcardType } from "../utils/types";
 export default function Practice() {
   const data = useLoaderData() as FlashcardType[];
 
+  const easyBtnRef = useRef<HTMLButtonElement>(null);
+  const mediumBtnRef = useRef<HTMLButtonElement>(null);
+  const hardBtnRef = useRef<HTMLButtonElement>(null);
+
   const [isFinished, setIsFinished] = useState<boolean>(false);
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
   const [counter, setCounter] = useState<number>(0);
+
+  const nextQuestion = () => {
+    setShowAnswer(false);
+    if (counter === data.length - 1) {
+      setIsFinished(true);
+      return;
+    }
+    setCounter((p) => (p < data.length - 1 ? p + 1 : data.length - 1));
+  };
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.target !== document.body) return;
 
-      // TODO: add difficulty level buttons (map to length of difficultyLevels array)
+      if (e.key === "r") {
+        setCounter(0);
+        setIsFinished(false);
+      }
+
       switch (e.key) {
-        case "r":
-          setCounter(0);
-          setIsFinished(false);
         case "ArrowLeft":
         case "a":
           if (counter === 0) return;
           setShowAnswer(false);
-          // setCounter((p) => (p > 0 ? p - 1 : data.length - 1));
           setCounter((p) => (p > 0 ? p - 1 : 0));
           break;
         case "ArrowRight":
         case "d":
-          setShowAnswer(false);
-          // setCounter((p) => (p < data.length - 1 ? p + 1 : 0));
-          if (counter === data.length - 1) {
-            setIsFinished(true);
-            return;
-          }
-          setCounter((p) => (p < data.length - 1 ? p + 1 : data.length - 1));
+          nextQuestion();
           break;
         case " ":
           setShowAnswer((p) => !p);
+          break;
+        case "1":
+          if (!showAnswer) return;
+          // updateFlashcard(data[counter].id, {
+          //   currentDifficulty: "easy",
+          // });
+          // nextQuestion();
+          easyBtnRef.current?.click();
+          break;
+        case "2":
+          if (!showAnswer) return;
+          // updateFlashcard(data[counter].id, {
+          //   currentDifficulty: "medium",
+          // });
+          // nextQuestion();
+          mediumBtnRef.current?.click();
+          break;
+        case "3":
+          if (!showAnswer) return;
+          // updateFlashcard(data[counter].id, {
+          //   currentDifficulty: "hard",
+          // });
+          // nextQuestion();
+          hardBtnRef.current?.click();
+          break;
       }
     };
 
@@ -48,7 +80,7 @@ export default function Practice() {
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [counter]);
+  }, [counter, showAnswer]);
 
   if (!data.length) {
     return (
@@ -98,6 +130,13 @@ export default function Practice() {
             <div className="flex space-x-4">
               {difficultyLevels.map((level) => (
                 <button
+                  ref={
+                    level.key === "easy"
+                      ? easyBtnRef
+                      : level.key === "medium"
+                      ? mediumBtnRef
+                      : hardBtnRef
+                  }
                   key={level.key}
                   className={`btn ${level.textStyle}`}
                   onClick={async () => {
