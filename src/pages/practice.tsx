@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Header from "../components/header";
-import type { DifficultyType, FlashcardType } from "../utils/types";
-
-const difficultyLevels: { key: DifficultyType; label: string; textStyle: string }[] = [
-  { key: "easy", label: "Easy", textStyle: "text-emerald-500" },
-  { key: "medium", label: "Medium", textStyle: "text-yellow-500" },
-  { key: "hard", label: "Hard", textStyle: "text-red-500" },
-];
+import { difficultyLevels } from "../utils/constants";
+import { updateFlashcard } from "../utils/file";
+import type { FlashcardType } from "../utils/types";
 
 export default function Practice() {
   const data = useLoaderData() as FlashcardType[];
@@ -104,7 +100,11 @@ export default function Practice() {
                 <button
                   key={level.key}
                   className={`btn ${level.textStyle}`}
-                  onClick={() => {
+                  onClick={async () => {
+                    await updateFlashcard(data[counter].id, {
+                      currentDifficulty: level.key,
+                    });
+
                     setShowAnswer(false);
                     // setCounter((p) => (p < data.length - 1 ? p + 1 : 0));
                     if (counter === data.length - 1) {
