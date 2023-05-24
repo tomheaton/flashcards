@@ -16,8 +16,8 @@ export default function Cards() {
         ) : (
           <p className="w-[300px] text-sm font-semibold">Total: {data.length.toLocaleString()}</p>
         )}
-        {data.map((flashcard) => (
-          <Flashcard key={flashcard.id} flashcard={flashcard} />
+        {data.map((flashcard, index) => (
+          <Flashcard tabIndex={index} key={flashcard.id} flashcard={flashcard} />
         ))}
       </main>
     </div>

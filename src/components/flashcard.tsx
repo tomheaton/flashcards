@@ -3,7 +3,13 @@ import { useRevalidator } from "react-router-dom";
 import { deleteFlashcard, updateFlashcard } from "../utils/file";
 import type { FlashcardType } from "../utils/types";
 
-export default function Flashcard({ flashcard }: { flashcard: FlashcardType }) {
+export default function Flashcard({
+  flashcard,
+  tabIndex,
+}: {
+  flashcard: FlashcardType;
+  tabIndex: number;
+}) {
   let revalidator = useRevalidator();
 
   const flashcardRef = useRef<HTMLDivElement>(null);
@@ -40,7 +46,10 @@ export default function Flashcard({ flashcard }: { flashcard: FlashcardType }) {
 
   if (!isEditing) {
     return (
-      <div className="group flex w-[300px] items-center justify-between space-y-2 rounded-lg border-2 border-white/50 p-2">
+      <div
+        className="group flex w-[300px] items-center justify-between space-y-2 rounded-lg border-2 border-white/50 p-2"
+        tabIndex={tabIndex}
+      >
         <div className="flex items-center space-x-4">
           <div>
             <p className="text-sm font-semibold">{flashcard.question}</p>
@@ -67,6 +76,7 @@ export default function Flashcard({ flashcard }: { flashcard: FlashcardType }) {
     <div
       ref={flashcardRef}
       className="flex w-[300px] flex-col space-y-2 rounded-lg border-2 border-white/50 p-2"
+      tabIndex={tabIndex}
     >
       <form onSubmit={handleSubmit} className="flex flex-col space-y-2 text-sm">
         <label htmlFor="question" className="text-sm font-semibold">
