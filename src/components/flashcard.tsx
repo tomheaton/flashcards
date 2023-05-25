@@ -50,22 +50,15 @@ export default function Flashcard({
         className="group flex w-[300px] items-center justify-between space-y-2 rounded-lg border-2 border-white/50 p-2"
         tabIndex={tabIndex}
       >
-        <div className="flex items-center space-x-4">
-          <div>
-            <p className="text-sm font-semibold">{flashcard.question}</p>
-            <p className="text-sm">{flashcard.answer}</p>
-          </div>
-          {/* TODO: this */}
-          {/* @ts-ignore */}
-          {/* <p
-            className={`btn ${
-              difficultyLevels.find(({ key }) => key === flashcard.currentDifficulty)?.textStyle
-            }`}
-          >
-            {flashcard.currentDifficulty}
-          </p> */}
+        <div className="mr-4 overflow-hidden">
+          <p className="text-ellipsis text-sm font-semibold">{flashcard.question}</p>
+          <p className="text-ellipsis text-sm">{flashcard.answer}</p>
         </div>
-        <button className="btn hidden group-hover:block" onClick={() => setIsEditing(true)}>
+        <button
+          // className="btn hidden group-hover:block"
+          className="btn opacity-0 group-hover:opacity-100"
+          onClick={() => setIsEditing(true)}
+        >
           Edit
         </button>
       </div>
