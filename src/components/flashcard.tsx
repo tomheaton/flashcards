@@ -52,7 +52,8 @@ export default function Flashcard({
       >
         <div className="mr-4 overflow-hidden">
           <p className="text-ellipsis text-sm font-semibold">{flashcard.question}</p>
-          <p className="text-ellipsis text-sm">{flashcard.answer}</p>
+          <p className="text-ellipsis text-xs">{flashcard.answer}</p>
+          <p className="text-ellipsis text-xs">Deck: {flashcard.deck ?? "default"}</p>
         </div>
         <button
           // className="btn hidden group-hover:block"
@@ -99,6 +100,24 @@ export default function Flashcard({
           onChange={(e) => setData({ ...data, answer: e.target.value })}
           autoComplete="off"
         />
+        <label htmlFor="deck" className="text-sm font-semibold">
+          Deck
+        </label>
+        <select
+          id="deck"
+          name="deck"
+          className="rounded-md border-2 border-white/50 bg-black px-4 py-2 text-white"
+          required
+          value={data.deck ?? "default"}
+          onChange={(e) => setData({ ...data, deck: e.target.value })}
+        >
+          {/* TODO: get this from data */}
+          <option value="default" defaultChecked>
+            Default
+          </option>
+          <option value="test">Test</option>
+        </select>
+        <br />
         <button type="submit" className="btn">
           Save
         </button>

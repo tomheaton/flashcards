@@ -43,7 +43,11 @@ export const readData = async () => {
 };
 
 // TODO: better error handling
-export const saveFlashcard = async (flashcard: Pick<FlashcardType, "question" | "answer">) => {
+export const createFlashcard = async (
+  // flashcard: Pick<FlashcardType, "question" | "answer" | "deck">,
+  flashcard: Pick<FlashcardType, "question" | "answer">,
+) => {
+  console.log("here");
   try {
     let flashcards: FlashcardType[] = [];
 

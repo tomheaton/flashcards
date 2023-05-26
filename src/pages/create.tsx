@@ -1,14 +1,15 @@
 import { useEffect, useState, type FormEvent } from "react";
 import Header from "../components/header";
-import { saveFlashcard } from "../utils/file";
+import { createFlashcard } from "../utils/file";
 import type { FlashcardType } from "../utils/types";
 
 // TODO: refactor to /questions/create
 export default function Create() {
   const [showSuccess, setShowSuccess] = useState<boolean>(false);
-  const [data, setData] = useState<Pick<FlashcardType, "question" | "answer">>({
+  const [data, setData] = useState<Pick<FlashcardType, "question" | "answer" | "deck">>({
     question: "",
     answer: "",
+    deck: "default",
   });
 
   useEffect(() => {
@@ -24,10 +25,10 @@ export default function Create() {
   }, [showSuccess]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    await saveFlashcard(data);
     e.preventDefault();
+    await createFlashcard(data);
     setShowSuccess(true);
-    setData({ question: "", answer: "" });
+    setData({ question: "", answer: "", deck: "default" });
   };
 
   return (
@@ -63,6 +64,23 @@ export default function Create() {
             onChange={(e) => setData({ ...data, answer: e.target.value })}
             autoComplete="off"
           />
+          <label htmlFor="deck" className="text-sm font-semibold">
+            Deck
+          </label>
+          <select
+            id="deck"
+            name="deck"
+            className="rounded-md border-2 border-white/50 bg-black px-4 py-2 text-white"
+            required
+            value={data.deck}
+            onChange={(e) => setData({ ...data, deck: e.target.value })}
+          >
+            {/* TODO: get this from data */}
+            <option value="default" defaultChecked>
+              Default
+            </option>
+            <option value="test">Test</option>
+          </select>
           <br />
           <button type="submit" className="btn">
             Create

@@ -10,7 +10,7 @@ export default function Cards() {
     <div className="flex h-screen w-full flex-col py-20">
       <Header />
 
-      <main className="flex flex-1 flex-col items-center space-y-2">
+      <main className="flex flex-1 flex-col items-center space-y-2 pb-4">
         {data.length === 0 ? (
           <p className="text-sm font-semibold">No flashcards found!</p>
         ) : (
