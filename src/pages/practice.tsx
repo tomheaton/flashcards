@@ -113,9 +113,9 @@ export default function Practice() {
       <Header />
 
       <main className="flex flex-1 flex-col items-center justify-between">
-        <div className="flex flex-col items-center">
-          <p className="text-xl font-semibold">{data[counter]?.question}</p>
-          {showAnswer && <p>{data[counter]?.answer}</p>}
+        <div className="flex w-[400px] flex-col items-center md:w-[600px]">
+          <p className="text-center text-xl font-semibold">{data[counter]?.question}</p>
+          {showAnswer && <p className="text-center">{data[counter]?.answer}</p>}
         </div>
 
         <div className="flex flex-col space-y-4">
