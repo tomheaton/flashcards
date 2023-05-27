@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Header from "../components/header";
-import { difficultyLevels } from "../utils/constants";
+import { DIFFICULTY_LEVELS } from "../utils/constants";
 import { updateFlashcard } from "../utils/file";
 import type { FlashcardType } from "../utils/types";
 
@@ -113,7 +113,7 @@ export default function Practice() {
       <Header />
 
       <main className="flex flex-1 flex-col items-center justify-between">
-        <div className="flex w-[400px] flex-col items-center md:w-[600px]">
+        <div className="flex w-[400px] flex-col items-center lg:w-[600px]">
           <p className="text-center text-xl font-semibold">{data[counter]?.question}</p>
           {showAnswer && <p className="text-center">{data[counter]?.answer}</p>}
         </div>
@@ -121,7 +121,7 @@ export default function Practice() {
         <div className="flex flex-col space-y-4">
           {showAnswer && (
             <div className="flex space-x-4">
-              {difficultyLevels.map((level) => (
+              {DIFFICULTY_LEVELS.map((level) => (
                 <button
                   key={level.key}
                   className={`btn ${level.textStyle}`}

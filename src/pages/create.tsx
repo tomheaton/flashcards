@@ -1,5 +1,6 @@
 import { useEffect, useState, type FormEvent } from "react";
 import Header from "../components/header";
+import { DECKS } from "../utils/constants";
 import { createFlashcard } from "../utils/file";
 import type { FlashcardType } from "../utils/types";
 
@@ -75,11 +76,11 @@ export default function Create() {
             value={data.deck}
             onChange={(e) => setData({ ...data, deck: e.target.value })}
           >
-            {/* TODO: get this from data */}
-            <option value="default" defaultChecked>
-              Default
-            </option>
-            <option value="test">Test</option>
+            {DECKS.map((deck) => (
+              <option key={deck.key} value={deck.key}>
+                {deck.label}
+              </option>
+            ))}
           </select>
           <br />
           <button type="submit" className="btn">

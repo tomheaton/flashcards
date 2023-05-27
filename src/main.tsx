@@ -23,11 +23,6 @@ const router = createBrowserRouter([
     errorElement: <Error />,
   },
   {
-    path: "/create",
-    element: <Create />,
-    errorElement: <Error />,
-  },
-  {
     path: "/cards",
     element: <Cards />,
     errorElement: <Error />,
@@ -40,6 +35,11 @@ const router = createBrowserRouter([
         return result.success ? result.data : [];
       });
     },
+  },
+  {
+    path: "/create",
+    element: <Create />,
+    errorElement: <Error />,
   },
   {
     path: "/practice",

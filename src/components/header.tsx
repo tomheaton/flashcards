@@ -1,9 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 
-const routes: { path: string; name: string }[] = [
+const ROUTES: { path: string; name: string }[] = [
   { path: "/", name: "Home" },
-  { path: "/create", name: "Create" },
   { path: "/cards", name: "Cards" },
+  { path: "/create", name: "Create" },
   { path: "/practice", name: "Practice" },
   { path: "/stats", name: "Stats" },
 ];
@@ -11,13 +11,13 @@ const routes: { path: string; name: string }[] = [
 export default function Header() {
   const location = useLocation();
 
-  const currentRoute = routes.find((route) => route.path === location.pathname);
+  const currentRoute = ROUTES.find((route) => route.path === location.pathname);
 
   return (
     <div className="mb-4 flex flex-col items-center space-y-2">
       <h1 className="text-4xl font-extrabold tracking-tighter">{currentRoute?.name ?? "Error"}</h1>
       <div className="space-x-4">
-        {routes.map((route) => (
+        {ROUTES.map((route) => (
           <Link
             to={route.path}
             key={route.path}

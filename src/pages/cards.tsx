@@ -2,14 +2,13 @@ import { useMemo, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Flashcard from "../components/flashcard";
 import Header from "../components/header";
+import { DECKS } from "../utils/constants";
 import type { FlashcardType } from "../utils/types";
-
-const DECKS = ["default", "test"];
 
 export default function Cards() {
   const data = useLoaderData() as FlashcardType[];
 
-  const [decks, setDecks] = useState<string[]>(DECKS);
+  const [decks, setDecks] = useState<string[]>([]);
 
   const filteredData = useMemo(() => {
     if (decks.length === 0) return data;
@@ -32,15 +31,17 @@ export default function Cards() {
               <p className="text-sm font-semibold">Decks:</p>
               {DECKS.map((deck) => (
                 <button
-                  key={deck}
-                  className={`btn ${decks.includes(deck) ? "bg-white/20 text-white" : ""}`}
+                  key={deck.key}
+                  className={`btn ${decks.includes(deck.key) ? "bg-white/20 text-white" : ""}`}
                   onClick={() =>
                     setDecks((prev) =>
-                      prev.includes(deck) ? prev.filter((d) => d !== deck) : [...prev, deck],
+                      prev.includes(deck.key)
+                        ? prev.filter((d) => d !== deck.key)
+                        : [...prev, deck.key],
                     )
                   }
                 >
-                  {deck}
+                  {deck.label}
                 </button>
               ))}
             </div>
