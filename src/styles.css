@@ -25,3 +25,9 @@ body {
 ::-moz-selection {
   @apply bg-red-500/50;
 }
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
